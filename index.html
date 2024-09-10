@@ -1,71 +1,83 @@
 <!DOCTYPE html>
-<html style="font-size: 16px;" lang="en">
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="keywords" content="QR Code">
-    <meta name="description" content="">
-    <title>QR Code and Submit Data to Google Sheets</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
-    <link rel="stylesheet" href="index.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
-    <meta name="generator" content="Nicepage 6.17.0, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    <script type="application/ld+json">{
-        "@context": "http://schema.org",
-        "@type": "Organization",
-        "name": "",
-        "logo": "images/default-logo.png"
-    }</script>
-    <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Home">
-    <meta property="og:type" content="website">
-    <meta data-intl-tel-input-cdn-path="intlTelInput/">
+    <title>QR Code Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .form-group input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <!-- QR Code Form Section -->
-    <section class="u-align-center u-clearfix u-container-align-center u-grey-5 u-section-1" id="carousel_67b9">
-      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <div class="u-align-center u-border-2 u-border-palette-1-base u-container-align-center u-container-style u-group u-palette-1-base u-shape-rectangle u-group-1">
-          <div class="u-container-layout u-valign-bottom-xs u-valign-top-lg u-valign-top-md u-valign-top-xl u-container-layout-1">
-            <div class="u-container-style u-expanded-width u-group u-white u-group-2">
-              <div class="u-container-layout u-valign-middle u-container-layout-2">
-                <h2 class="u-text u-text-default u-text-palette-1-base u-text-1">Items QR</h2>
-              </div>
+    <div class="form-container">
+        <h1>QR Code Form</h1>
+        <form id="qrForm" action="YOUR_WEB_APP_URL" method="POST">
+            <div class="form-group">
+                <label for="qrCode">Qr Code</label>
+                <input type="text" id="qrCode" name="qrCode" required>
             </div>
-            <div class="u-form u-login-control u-form-1">
-              <form action="#" class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 0px;" method="post">
-                <div class="u-form-group u-form-name u-label-top">
-                  <label for="username-a30d" class="u-label u-text-body-alt-color u-label-1">QR Code *</label>
-                  <input type="text" placeholder="Scan Item QR" id="username-a30d" name="username" class="u-border-8 u-border-white u-input u-input-rectangle u-radius-50 u-input-1" required="">
-                </div>
-                <div class="u-form-group u-form-Quantity u-label-top">
-                  <label for="Quantity-a30d" class="u-label u-text-body-alt-color u-label-2">Quantity *</label>
-                  <input type="number" placeholder="Enter Quantity" id="Quantity-a30d" name="Quantity" class="u-border-8 u-border-white u-input u-input-rectangle u-radius-50 u-input-2" required="">
-                </div>
-                <div class="u-align-left u-form-group u-form-submit u-label-top">
-                  <button type="submit" class="u-active-white u-border-none u-btn u-btn-round u-btn-submit u-button-style u-hover-white u-palette-2-base u-radius-50 u-text-active-palette-2-base u-text-hover-palette-2-base u-btn-1">Submit</button>
-                </div>
-                <input type="hidden" value="" name="recaptchaResponse">
-              </form>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" name="quantity" required>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Google Sheets Form Section -->
-    <section>
-      <form action="https://script.google.com/macros/s/AKfycbxbOCuLmdT_kIlNsUYtJ_M22aWEG5Hif0ZmoaxZDxaT9wmPNq_YCtCyYp-ZqhAeiZQszw/exec" method="post">
-        <label for="Qr">QR Code:</label>
-        <input type="text" id="Qr" name="Qr" required><br><br>
-        
-        <label for="Quantity">Quantity:</label>
-        <input type="number" id="Quantity" name="Quantity" required><br><br>
-        
-        <input type="submit" value="Submit">
-      </form>
-    </section>
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
