@@ -7,77 +7,103 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #f4f4f9;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
-        .form-container {
-            background-color: #fff;
+
+        .container {
+            background: #fff;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             width: 300px;
+            max-width: 100%;
         }
+
         h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
             text-align: center;
             color: #333;
+            margin-bottom: 20px;
         }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
+
+        label {
             display: block;
-            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: bold;
             color: #555;
-            margin-bottom: 5px;
         }
-        .form-group input {
-            width: 100%;
+
+        input[type="text"], input[type="number"] {
+            width: calc(100% - 22px);
             padding: 10px;
+            margin-bottom: 20px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            font-size: 14px;
+            box-sizing: border-box;
         }
-        .form-group input:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-        .form-group button {
-            width: 100%;
-            padding: 10px;
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
             border: none;
             border-radius: 4px;
-            background-color: #007bff;
-            color: #fff;
-            font-size: 16px;
+            padding: 10px 15px;
             cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
         }
-        .form-group button:hover {
+
+        button:hover {
             background-color: #0056b3;
+        }
+
+        .alert {
+            color: #d9534f;
         }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h1>QR Code Form</h1>
-        <form id="qrForm" action="https://script.google.com/macros/s/AKfycbxbOCuLmdT_kIlNsUYtJ_M22aWEG5Hif0ZmoaxZDxaT9wmPNq_YCtCyYp-ZqhAeiZQszw/exec" method="POST">
-            <div class="form-group">
-                <label for="qrCode">Qr Code</label>
-                <input type="text" id="qrCode" name="qrCode" required>
-            </div>
-            <div class="form-group">
-                <label for="quantity">Quantity</label>
-                <input type="number" id="quantity" name="quantity" required>
-            </div>
-            <div class="form-group">
-                <button type="submit">Submit</button>
-            </div>
+    <div class="container">
+        <h1>Submit QR Code Data</h1>
+        <form id="qrForm">
+            <label for="qrcode">QR Code:</label>
+            <input type="text" id="qrcode" name="qrcode" required>
+            
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" required>
+            
+            <button type="submit">Submit</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById('qrForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const qrcode = document.getElementById('qrcode').value;
+            const quantity = document.getElementById('quantity').value;
+
+            fetch('https://script.google.com/macros/s/AKfycbzxJmQNafX1LHnTuQb-b7RI49GUk6AZ79_flmIkgjAR63Z0TwVNjdQGZikn0aL0arJ6/exec', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ qrcode, quantity })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Data submitted successfully!');
+                document.getElementById('qrForm').reset();
+            })
+            .catch(error => {
+                alert('Error submitting data: ' + error);
+            });
+        });
+    </script>
 </body>
 </html>
