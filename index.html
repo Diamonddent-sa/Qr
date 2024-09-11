@@ -97,8 +97,8 @@
         document.getElementById('successMessage').style.display = 'block'; // Show success message
         this.reset(); // Clear the form
         setTimeout(() => {
-          window.location.href = 'https://diamonddent-sa.github.io/Qr/'; // Redirect after delay
-        }, 2000); // Delay for 2 seconds to show the success message
+          location.reload(); // Refresh the page after 5 seconds
+        }, 5000); // 5 seconds delay
       })
       .catch(error => console.error('Error:', error));
     });
