@@ -1,107 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Items QR Code</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .form-container {
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      max-width: 400px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .form-container h2 {
-      margin: 0 0 15px;
-      font-size: 24px;
-      color: #333;
-      text-align: center;
-    }
-    .form-container label {
-      display: block;
-      margin: 0 0 5px;
-      font-size: 14px;
-      color: #333;
-    }
-    .form-container input[type="text"],
-    .form-container input[type="number"] {
-      width: calc(100% - 20px);
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      box-sizing: border-box;
-      font-size: 16px;
-    }
-    .form-container button {
-      width: 100%;
-      padding: 12px;
-      background-color: #007bff;
-      border: none;
-      border-radius: 4px;
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .form-container button:hover {
-      background-color: #0056b3;
-    }
-    .form-container button:active {
-      background-color: #004085;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Data</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Generate QR Code</h2>
-    <form id="qrForm" method="POST" action="https://script.google.com/macros/s/AKfycbwymkN3iEOfeoKZjnpRyxteN8PfeMq7fI8N_bR_I4W06c4DTY74knKqQ8Xgh2jiA1Sd/exec">
-      <label for="qrcode">QR Code Data:</label>
-      <input id="qrcode" name="Qrcode" type="text" placeholder="Enter QR code data" required>
-      
-      <label for="qty">Quantity:</label>
-      <input id="qty" name="Qty" type="number" placeholder="Enter quantity" required>
-      
-      <button type="submit">Send</button>
-    </form>
-  </div>
+    <div class="container">
+        <h1>Submit Data</h1>
+        <form id="qrForm">
+            <label for="qr">Qr Code:</label>
+            <input type="text" id="qr" name="Qr" placeholder="Enter QR code" required>
 
-  <script>
-    document.getElementById('qrForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent the default form submission
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="Quantity" placeholder="Enter quantity" min="1" required>
 
-      // Create a FormData object
-      var formData = new FormData(this);
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 
-      // Send the form data using fetch
-      fetch(this.action, {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => {
-        if (response.ok) {
-          window.location.href = 'https://diamonddent-sa.github.io/Qr/'; // Redirect after successful submission
-        } else {
-          alert('Form submission failed. Please try again.');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
-      });
-    });
-  </script>
+    <script>
+        document.getElementById('qrForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = new URLSearchParams(formData);
+
+            fetch('https://script.google.com/macros/s/AKfycbzxJmQNafX1LHnTuQb-b7RI49GUk6AZ79_flmIkgjAR63Z0TwVNjdQGZikn0aL0arJ6/exec', {
+                method: 'POST',
+                body: data
+            })
+            .then(response => response.json())
+            .then(result => {
+                alert('Data submitted successfully!');
+            })
+            .catch(error => {
+                alert('Error submitting data.');
+                console.error('Error:', error);
+            });
+        });
+    </script>
 </body>
 </html>
