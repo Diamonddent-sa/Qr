@@ -67,14 +67,29 @@
 <body>
   <div class="form-container">
     <h2>Submit Your Data</h2>
-    <form 
-      method="POST" 
-      action="https://script.google.com/macros/s/AKfycbzGtuqLCdkTjRBYpSfwueUIsJJ2loDwTlHIrFiriUwfuYoxcGUazFAs79FcHhsg9gWXrg/exec"
-    >
+    <form id="dataForm">
       <input name="Qr" type="text" placeholder="Qr" required>
       <input name="Quantity" type="number" placeholder="Quantity" required>
       <button type="submit">Send</button>
     </form>
   </div>
+  <script>
+    document.getElementById('dataForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+      
+      const formData = new FormData(this);
+      const url = 'https://script.google.com/macros/s/AKfycbw47kkmoHvF_1WXt0p8Oe4cykOKjv08-W2bWAAK4I0kDTQy0rgBZoaDRxAQVtwX2mAA3A/exec';
+
+      fetch(url, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(() => {
+        window.location.href = 'https://diamonddent-sa.github.io/Qr/';
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  </script>
 </body>
 </html>
