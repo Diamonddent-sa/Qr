@@ -62,13 +62,6 @@
     .form-container button:hover {
       background-color: #ff8c00; /* Darker orange on hover */
     }
-    
-    .message {
-      display: none;
-      text-align: center;
-      color: #28a745; /* Green color for success message */
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
@@ -79,7 +72,6 @@
       <input name="Quantity" type="number" placeholder="Quantity" required>
       <button type="submit">Send</button>
     </form>
-    <div id="successMessage" class="message">Submitted</div>
   </div>
   <script>
     document.getElementById('dataForm').addEventListener('submit', function(event) {
@@ -94,7 +86,6 @@
       })
       .then(response => response.text())
       .then(() => {
-        document.getElementById('successMessage').style.display = 'block'; // Show success message
         this.reset(); // Clear the form
         setTimeout(() => {
           location.reload(); // Refresh the page after 5 seconds
